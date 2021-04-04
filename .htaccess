@@ -1,0 +1,28 @@
+# Protect My Directories
+Options -Indexes
+
+# Protect my htaccess file
+<Files .htaccess>
+	order deny,allow
+	deny from all
+</Files>
+
+# Clean Url for User Profiles
+  AddDefaultCharset UTF-8
+  FileETag None
+  Options +FollowSymLinks -MultiViews
+
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^([^.]+)$ $1.php [NC,L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+api/v1/unpark\?slot_number=([^\s&]+) [NC]
+RewriteRule ^ api/v1/unpark/%1? [R=301,L]
+RewriteRule ^api/v1/unpark/([^/]+)?$ api/v1/unpark.php?slot_number=$1 [L,QSA]
+
+# php_value session.gc_maxlifetime 604800
+# php_flag display_startup_errors on
+# php_flag display_errors on
+# php_value error_log logs/all_errors.log
+
+# ErrorDocument 404 http://127.0.0.1/nas/404
