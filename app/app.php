@@ -78,7 +78,7 @@
     |
     */
 
-    defined('APP_URL')          OR define('APP_URL', '');
+    defined('APP_URL')          OR define('APP_URL', 'http://127.0.0.1/nas/');
 
     // defined('APP_URL')          OR define('APP_URL', 'https://app.farmsby.com/');
 
@@ -94,7 +94,7 @@
     |
     */
 
-    defined('APP_STORAGE')      OR define('APP_STORAGE', APP_URL.'app/storage/');
+    defined('APP_HELPER')       OR define('APP_HELPER', APP_URL.'app/helpers/');
     
     /*
     |--------------------------------------------------------------------------
