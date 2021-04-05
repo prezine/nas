@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once '../../app/app.php';
     include_once '../../app/controllers/Nas.php';
     include_once '../../app/controllers/FileReader.php';
@@ -7,6 +8,9 @@
     $dotenv = new Dotenv();
     $nasacademy = new NasAcademy();
     $filemanager = new FileReader();
+    // Rate Limiter
+    $nasacademy->rateLimiter();
+    // Load dotenv
     $dotenv->load(__DIR__.'/.env');
     $nasacademy->viewJson();
     
@@ -20,7 +24,11 @@
                 'status' => 200,
                 'data' => $data[$slotNumber], 
             );
-            echo json_encode($res, true);
+            if ($data[$slotNumber][$slotNumber]['car_number'] == $carNumber) {
+                echo json_encode($res, true);
+            } else {
+                echo $nasacademy->res('No Record with car_number:'. $carNumber .' & slot_number:'. $slotNumber, 404);
+            }
         } else {
             echo $nasacademy->res('No Record found', 404);
         }

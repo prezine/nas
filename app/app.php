@@ -37,10 +37,6 @@
     | application. If disabled, a simple generic error page is shown.
     |
     */
-
-    /*
-        => Development Mood
-    */
     
     defined('APP_DEBUG')        OR define('APP_DEBUG', true); // true or false
 
@@ -59,13 +55,11 @@
     error_reporting(-1);
 
 
-    /*
-    defined('APP_DEBUG')        OR define('APP_DEBUG', false); // true or false
+    // defined('APP_DEBUG')        OR define('APP_DEBUG', false); // true or false
 
-    ini_set('display_errors', 0);
+    // ini_set('display_errors', 0);
     
-    error_reporting(0);
-    */
+    // error_reporting(0);
 
     /*
     |--------------------------------------------------------------------------
@@ -79,10 +73,6 @@
     */
 
     defined('APP_URL')          OR define('APP_URL', 'http://127.0.0.1/nas/');
-
-    // defined('APP_URL')          OR define('APP_URL', 'https://app.farmsby.com/');
-
-    // defined('APP_URL')          OR define('APP_URL', 'https://farmsby-dev.herokuapp.com/');
 
     /*
     |--------------------------------------------------------------------------
