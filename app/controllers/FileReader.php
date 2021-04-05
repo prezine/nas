@@ -17,8 +17,4 @@ class FileReader extends NasAcademy
     $final_data = json_encode($array_data, JSON_PRETTY_PRINT); 
     return (file_put_contents($file, $final_data)) ? 'ok' : 'error' ;
   }
-  public function deletor($id = '', $file = '', $data = '')
-  {
-    
-  }
 }
