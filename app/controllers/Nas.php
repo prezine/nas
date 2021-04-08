@@ -70,23 +70,24 @@
 			// The period in which it limits, 60 means 1 minuts
 			$period = 5;
 			$stamp_init = date("Y-m-d H:i:s");
-			if(!isset($_SESSION['FIRST_REQUEST_TIME'])){
-				$_SESSION['FIRST_REQUEST_TIME'] = $stamp_init;
+			if($this->getSession('FIRST_REQUEST_TIME') !== NULL) {
+				$this->setSession('FIRST_REQUEST_TIME', $stamp_init);
 			}
-			$first_request_time = $_SESSION['FIRST_REQUEST_TIME'];
+
+			$first_request_time = $this->getSession('FIRST_REQUEST_TIME');
 			$stamp_expire = date("Y-m-d H:i:s", strtotime($first_request_time) + ($period));
-			if(!isset($_SESSION['REQ_COUNT'])){
-				$_SESSION['REQ_COUNT'] = 0;
+			if($this->getSession('REQ_COUNT')){
+				$this->setSession('REQ_COUNT', 0);
 			}
-			$req_count = $_SESSION['REQ_COUNT'];
+			$req_count = $this->getSession('REQ_COUNT');
 			$req_count++;
 			// Expired
 			if($stamp_init > $stamp_expire) {
 				$req_count = 1;
 				$first_request_time = $stamp_init;
 			}
-			$_SESSION['REQ_COUNT'] = $req_count;
-			$_SESSION['FIRST_REQUEST_TIME'] = $first_request_time;
+			$this->setSession('REQ_COUNT', $req_count);
+			$this->setSession('FIRST_REQUEST_TIME', $first_request_time);
 			header('X-RateLimit-Limit: '. $cap);
 			header('X-RateLimit-Remaining: ' . ($cap - $req_count));
 			// Too many requests
